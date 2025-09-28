@@ -13,6 +13,7 @@
       --card-bg: #1a1a1a;
       --text: #fff;
       --accent: #9370db; /* Muted purple accent */
+      --border: #333;
     }
 
     * {
@@ -99,6 +100,7 @@
       position: relative;
       opacity: 0;
       animation: fadeIn 0.5s forwards;
+      border: 1px solid var(--border);
     }
 
     @keyframes fadeIn {
@@ -112,7 +114,7 @@
 
     .profile-header {
       position: relative;
-      height: 150px;
+      height: 180px;
       overflow: hidden;
     }
 
@@ -135,6 +137,7 @@
       border-radius: 50%;
       background: var(--card-bg);
       transition: all 0.3s;
+      z-index: 2;
     }
 
     .bio:hover .profile-pic-container {
@@ -164,6 +167,7 @@
       color: var(--secondary);
       margin-bottom: 15px;
       font-weight: bold;
+      font-size: 0.9rem;
     }
 
     .view-profile {
@@ -176,6 +180,7 @@
       font-weight: bold;
       transition: all 0.3s;
       box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+      margin-top: 10px;
     }
 
     .view-profile:hover {
@@ -189,6 +194,7 @@
       border-radius: 0 0 15px 15px;
       display: none;
       animation: slideDown 0.4s ease;
+      border-top: 1px solid var(--border);
     }
 
     @keyframes slideDown {
@@ -303,19 +309,17 @@
         social: {
           telegram: "https://t.me/prasingyou",
           discord: "https://discord.gg/example"
-        }
-      },
-      {
-        id: 2,
-        name: "bently bentaga",
+
+          id: 2,
+        name: "lexi",
         role: "Founder",
-        profilePic: "user2.jpg",
-        banner: "banner2.jpg",
-        username: "@wegotswatted",
-        bio: "xx",
+        profilePic: "https://cdn.discordapp.com/attachments/1409575993819271329/1421587343931871242/16e2d5ca035b3e6802b6e3068dd2458a.png?ex=68da3ca2&is=68d8eb22&hm=28552890c8c1188870640f8408fe56668c8185014acf5d04346db716e53b8fe6&",
+        banner: "https://cdn.discordapp.com/attachments/1409575993819271329/1421532816201748552/ED5206EE-70D2-4615-BA96-8590B1DDCC4F.gif?ex=68da09da&is=68d8b85a&hm=2948fcf0752a76ad9058286b3bcde71db0ab04450a96fe5f589f54aafd45dfc9&",
+        username: "@",
+        bio: "There's a sudden possibility to get arrested for hacking",
         social: {
-          telegram: "https://t.me/roterylive",
-          discord: "https://discord.com/users/1289118921600798766"
+          telegram: "https://t.me/prasingyou",
+          discord: "https://discord.gg/example"
         }
       }
     ];
@@ -351,9 +355,9 @@
         
         memberEl.innerHTML = `
           <div class="profile-header">
-            <img class="banner" src="${member.banner}" alt="Banner">
+            <img class="banner" src="${member.banner}" alt="${member.name}'s banner">
             <div class="profile-pic-container">
-              <img class="profile-pic" src="${member.profilePic}" alt="${member.name}">
+              <img class="profile-pic" src="${member.profilePic}" alt="${member.name}'s profile">
             </div>
           </div>
           <div class="bio-content">
@@ -363,7 +367,7 @@
             
             <div class="profile-details" id="profile${member.id}">
               <div class="profile-info">
-                <img src="${member.profilePic}" alt="${member.name}">
+                <img src="${member.profilePic}" alt="${member.name}'s profile">
                 <div>
                   <h3>${member.name}</h3>
                   <p>${member.username}</p>
