@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --primary: #888;  /* Light grey accent */
-      --secondary: #444; /* Dark grey accent */
+      --primary: #aaa; 
+      --secondary: #444; 
       --dark-bg: #0d0d0d;
       --card-bg: #1a1a1a;
       --text: #f5f5f5;
@@ -22,14 +22,18 @@
       background: var(--dark-bg);
       color: var(--text);
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header {
+      width: 100%;
+      max-width: 900px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
-      margin: 0 auto 30px;
+      margin-bottom: 30px;
       padding: 12px 25px;
       background: linear-gradient(135deg, #111, #222);
       border-radius: 15px;
@@ -41,7 +45,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
       letter-spacing: 2px;
     }
@@ -51,8 +55,8 @@
     .control-btn {
       background: rgba(255, 255, 255, 0.08);
       border: none;
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       color: white;
       cursor: pointer;
@@ -68,92 +72,75 @@
     }
 
     .bio-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
+      max-width: 900px;
     }
 
-    .bio {
+    /* Profile Circle */
+    .profile-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 12px rgba(255,255,255,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .profile-circle img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .profile-circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 18px rgba(255,255,255,0.25);
+    }
+
+    /* Expanded Profile Card */
+    .profile-card {
       background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid var(--border);
-      animation: fadeIn 0.5s forwards;
-      opacity: 0;
-    }
-
-    @keyframes fadeIn { to { opacity: 1; } }
-
-    .bio:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(255, 255, 255, 0.08);
-    }
-
-    .profile-header { position: relative; height: 160px; overflow: hidden; }
-
-    .banner {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s;
-    }
-    .bio:hover .banner { transform: scale(1.08); }
-
-    .profile-pic-container {
-      position: absolute;
-      bottom: -40px; left: 20px;
-      border: 4px solid var(--card-bg);
-      border-radius: 50%;
-      background: var(--card-bg);
-      z-index: 2;
-      transition: all 0.3s;
-    }
-    .bio:hover .profile-pic-container { border-color: var(--primary); }
-
-    .profile-pic {
-      width: 80px; height: 80px; object-fit: cover; border-radius: 50%;
-    }
-
-    .bio-content { padding: 55px 20px 25px; text-align: center; }
-
-    .bio h2 { font-size: 1.6rem; margin-bottom: 6px; color: var(--primary); }
-    .bio p.role { color: var(--secondary); font-weight: 600; margin-bottom: 15px; }
-
-    .view-profile {
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-    .view-profile:hover { transform: translateY(-3px); }
-
-    .profile-details {
-      margin-top: 18px;
-      background: #111;
-      border-radius: 12px;
-      padding: 18px;
+      max-width: 500px;
+      width: 100%;
+      margin-top: 20px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.7);
       display: none;
-      animation: slideDown 0.4s ease;
-      border: 1px solid var(--border);
+      animation: fadeIn 0.4s ease;
     }
-    @keyframes slideDown { from {opacity:0; transform:translateY(-15px);} to {opacity:1; transform:translateY(0);} }
+
+    @keyframes fadeIn { from {opacity:0; transform:scale(0.9);} to {opacity:1; transform:scale(1);} }
+
+    .profile-banner {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
 
     .profile-info {
-      display: flex; align-items: center; gap: 12px;
-      border-bottom: 1px solid #333; padding-bottom: 12px; margin-bottom: 15px;
+      padding: 20px;
+      text-align: center;
     }
-    .profile-info img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); }
+    .profile-info img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin-top: -60px;
+      border: 4px solid var(--card-bg);
+    }
+    .profile-info h2 { margin: 10px 0 5px; color: var(--primary); }
+    .profile-info p.role { color: var(--secondary); font-weight: bold; margin-bottom: 12px; }
+    .profile-info p.username { font-size: 0.9rem; color: #999; margin-bottom: 15px; }
 
     .about-me h4 { margin-bottom: 8px; color: var(--primary); }
+    .about-me p { font-size: 0.95rem; color: #ccc; }
 
-    .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 12px; }
+    .social-links { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
     .social-link { font-size: 1.4rem; color: var(--text); transition: color 0.3s; }
     .social-link:hover { color: var(--primary); }
 
@@ -171,9 +158,11 @@
 
   <div class="bio-container" id="membersContainer"></div>
 
+  <div id="profileCard" class="profile-card"></div>
+
   <footer><p>skidding.live</p></footer>
 
-  <audio id="bg-music" loop>
+  <audio id="bg-music" preload="auto" loop>
     <source src="https://cdn.discordapp.com/attachments/1409243539317194804/1409244460126179368/msrgod.flac" type="audio/mpeg">
   </audio>
 
@@ -189,69 +178,60 @@
         bio: "There's a sudden possibility to get arrested for hacking",
         social: {
           telegram: "https://t.me/prasingyou",
-          discord: "https://discord.gg/aint"
+          discord: "https://discord.gg/example"
         }
       },
       {
         id: 2,
         name: "lexi",
         role: "Founder",
-        profilePic: "",
-        banner: "",
+        profilePic: "https://cdn.discordapp.com/attachments/1409575993819271329/1421587343931871242/16e2d5ca035b3e6802b6e3068dd2458a.png",
+        banner: "https://cdn.discordapp.com/attachments/1409575993819271329/1421532816201748552/ED5206EE-70D2-4615-BA96-8590B1DDCC4F.gif",
         username: "@",
-        bio: "x",
+        bio: "There's a sudden possibility to get arrested for hacking",
         social: {
-          telegram: "https://t.me/",
-          discord: "https://discord.gg/"
+          telegram: "https://t.me/prasingyou",
+          discord: "https://discord.gg/example"
         }
       }
     ];
 
     const container = document.getElementById('membersContainer');
+    const profileCard = document.getElementById('profileCard');
+
     function renderMembers(arr) {
       container.innerHTML = '';
-      arr.forEach((m, i) => {
-        const el = document.createElement('div');
-        el.className = 'bio';
-        el.style.animationDelay = `${i*0.1}s`;
-        el.innerHTML = `
-          <div class="profile-header">
-            <img class="banner" src="${m.banner}" alt="${m.name} banner">
-            <div class="profile-pic-container">
-              <img class="profile-pic" src="${m.profilePic}" alt="${m.name}">
-            </div>
-          </div>
-          <div class="bio-content">
-            <h2>${m.name}</h2>
-            <p class="role">${m.role}</p>
-            <button class="view-profile" onclick="toggleProfile(${m.id})">View Profile</button>
-            <div class="profile-details" id="profile${m.id}">
-              <div class="profile-info">
-                <img src="${m.profilePic}" alt="${m.name}">
-                <div><h3>${m.name}</h3><p>${m.username}</p></div>
-              </div>
-              <div class="about-me"><h4>About</h4><p>${m.bio}</p></div>
-              <div class="social-links">
-                ${m.social.telegram ? `<a href="${m.social.telegram}" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>` : ""}
-                ${m.social.discord ? `<a href="${m.social.discord}" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>` : ""}
-              </div>
-            </div>
-          </div>
-        `;
-        container.appendChild(el);
+      arr.forEach(m => {
+        const circle = document.createElement('div');
+        circle.className = 'profile-circle';
+        circle.innerHTML = `<img src="${m.profilePic}" alt="${m.name}" loading="lazy">`;
+        circle.addEventListener('click', () => openProfile(m));
+        container.appendChild(circle);
       });
     }
 
-    function toggleProfile(id) {
-      const el = document.getElementById(`profile${id}`);
-      el.style.display = el.style.display === "block" ? "none" : "block";
+    function openProfile(m) {
+      profileCard.style.display = "block";
+      profileCard.innerHTML = `
+        <img class="profile-banner" src="${m.banner}" alt="${m.name} banner" loading="lazy">
+        <div class="profile-info">
+          <img src="${m.profilePic}" alt="${m.name}">
+          <h2>${m.name}</h2>
+          <p class="role">${m.role}</p>
+          <p class="username">${m.username}</p>
+          <div class="about-me"><h4>About</h4><p>${m.bio}</p></div>
+          <div class="social-links">
+            ${m.social.telegram ? `<a href="${m.social.telegram}" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>` : ""}
+            ${m.social.discord ? `<a href="${m.social.discord}" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>` : ""}
+          </div>
+        </div>
+      `;
+      profileCard.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     // Theme & music toggle
     const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
+    themeToggle.addEventListener('click', () => document.body.classList.toggle('light'));
 
     const musicToggle = document.getElementById('musicToggle');
     const audio = document.getElementById("bg-music");
